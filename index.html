@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcos | Personal Trainer</title>
+<meta name="description" content="Marcos — Personal Trainer. Treinos personalizados, consultoria online e acompanhamento de resultados. Transforme seu corpo e sua mente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & VARIÁVEIS
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --red:#e10600;
+  --red-2:#ff2b2b;
+  --red-dark:#a80400;
+  --black:#050505;
+  --black-2:#0b0b0b;
+  --black-3:#121212;
+  --black-4:#181818;
+  --line:rgba(255,255,255,.09);
+  --white:#ffffff;
+  --gray:#9b9b9b;
+  --gray-2:#6b6b6b;
+  --font-display:'Anton',Impact,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --radius:16px;
+}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+body.no-scroll{overflow:hidden}
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit}
+ul{list-style:none}
+
+::selection{background:var(--red);color:#fff}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--black-2)}
+::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--red)}
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+.container{
+  width:100%;
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.section{
+  position:relative;
+  padding:clamp(80px,10vw,140px) 0;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--red-2);
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:'';
+  width:28px;height:2px;
+  background:var(--red);
+  display:block;
+}
+
+.sec-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,5.5vw,4.4rem);
+  line-height:1.02;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+  font-weight:400;
+}
+.sec-title em{
+  font-style:normal;
+  color:var(--red);
+}
+
+.sec-text{
+  color:var(--gray);
+  font-size:1.02rem;
+  max-width:60ch;
+}
+
+.sec-head{
+  margin-bottom:clamp(40px,6vw,72px);
+}
+.sec-head.center{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.sec-head.center .sec-text{margin-top:18px}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:16px 34px;
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  border-radius:999px;
+  border:1px solid transparent;
+  cursor:pointer;
+  overflow:hidden;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),color .35s ease,border-color .35s ease;
+  white-space:nowrap;
+  isolation:isolate;
+}
+.btn svg{width:16px;height:16px;transition:transform .45s var(--ease)}
+.btn:hover svg{transform:translateX(5px)}
+.btn:active{transform:scale(.97)}
+
+.btn-primary{
+  background:var(--red);
+  color:#fff;
+  box-shadow:0 10px 30px -12px rgba(225,6,0,.9);
+}
+.btn-primary::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(120deg,#ff3b3b,#e10600 55%,#8f0300);
+  transform:translateY(101%);
+  transition:transform .5s var(--ease);
+  z-index:-1;
+}
+.btn-primary:hover::before{transform:translateY(0)}
+.btn-primary:hover{box-shadow:0 18px 46px -14px rgba(225,6,0,1)}
+
+.btn-ghost{
+  background:transparent;
+  border-color:rgba(255,255,255,.22);
+  color:#fff;
+}
+.btn-ghost:hover{
+  border-color:var(--red);
+  color:#fff;
+  background:rgba(225,6,0,.1);
+}
+
+/* ============================================================
+   CURSOR PERSONALIZADO
+   ============================================================ */
+.cursor,
+.cursor-dot{
+  position:fixed;
+  top:0;left:0;
+  pointer-events:none;
+  z-index:99999;
+  border-radius:50%;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.cursor{
+  width:38px;height:38px;
+  border:1.5px solid rgba(225,6,0,.75);
+  margin:-19px 0 0 -19px;
+  transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s ease,border-color .3s ease,opacity .3s ease;
+}
+.cursor-dot{
+  width:5px;height:5px;
+  background:var(--red);
+  margin:-2.5px 0 0 -2.5px;
+}
+.cursor.active{
+  width:74px;height:74px;
+  margin:-37px 0 0 -37px;
+  background:rgba(225,6,0,.12);
+  border-color:rgba(225,6,0,.9);
+}
+.cursor.hide{opacity:0!important}
+body.cursor-ready .cursor,
+body.cursor-ready .cursor-dot{opacity:1}
+
+@media (hover:hover) and (pointer:fine){
+  body.cursor-ready,
+  body.cursor-ready a,
+  body.cursor-ready button,
+  body.cursor-ready input,
+  body.cursor-ready textarea,
+  body.cursor-ready select,
+  body.cursor-ready label{cursor:none}
+}
+
+/* ============================================================
+   PRELOADER
+   ============================================================ */
+.preloader{
+  position:fixed;
+  inset:0;
+  background:var(--black);
+  z-index:100000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+.preloader.done{opacity:0;visibility:hidden}
+.preloader-logo{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,7vw,3.4rem);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.preloader-logo span{color:var(--red)}
+.preloader-bar{
+  width:min(220px,60vw);
+  height:3px;
+  background:rgba(255,255,255,.12);
+  border-radius:99px;
+  overflow:hidden;
+}
+.preloader-bar i{
+  display:block;
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--red-dark),var(--red),var(--red-2));
+  transition:width .25s ease;
+}
+
+/* ============================================================
+   BARRA DE PROGRESSO DE SCROLL
+   ============================================================ */
+.scroll-progress{
+  position:fixed;
+  top:0;left:0;
+  height:3px;
+  width:0%;
+  background:linear-gradient(90deg,var(--red-dark),var(--red),var(--red-2));
+  z-index:9999;
+  box-shadow:0 0 14px rgba(225,6,0,.8);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:9000;
+  padding:22px 0;
+  transition:padding .45s var(--ease),background .45s ease,backdrop-filter .45s ease,border-color .45s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  padding:12px 0;
+  background:rgba(5,5,5,.82);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom-color:var(--line);
+}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.logo{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  line-height:1;
+  position:relative;
+}
+.logo span{color:var(--red)}
+.logo::after{
+  content:'';
+  position:absolute;
+  left:0;bottom:-4px;
+  width:0;height:2px;
+  background:var(--red);
+  transition:width .5s var(--ease);
+}
+.logo:hover::after{width:100%}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+.nav-links a{
+  position:relative;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+  padding:6px 0;
+  transition:color .3s ease;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0;bottom:0;
+  width:0;height:1.5px;
+  background:var(--red);
+  transition:width .4s var(--ease);
+}
+.nav-links a:hover,
+.nav-links a.active{color:#fff}
+.nav-links a:hover::after,
+.nav-links a.active::after{width:100%}
+
+.nav-cta{padding:12px 26px;font-size:.72rem}
+
+.burger{
+  display:none;
+  width:44px;height:44px;
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:12px;
+  position:relative;
+  cursor:pointer;
+  transition:border-color .3s ease,background .3s ease;
+}
+.burger:hover{border-color:var(--red);background:rgba(225,6,0,.08)}
+.burger span{
+  position:absolute;
+  left:50%;
+  width:18px;height:2px;
+  background:#fff;
+  border-radius:2px;
+  transform:translateX(-50%);
+  transition:transform .4s var(--ease),opacity .3s ease,width .4s var(--ease);
+}
+.burger span:nth-child(1){top:16px}
+.burger span:nth-child(2){top:21px;width:12px;left:calc(50% - 3px);transform:translateX(-50%)}
+.burger span:nth-child(3){top:26px}
+.burger.open span:nth-child(1){transform:translateX(-50%) translateY(5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateX(-50%) translateY(-5px) rotate(-45deg)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:140px 0 60px;
+}
+.hero-bg{
+  position:absolute;
+  inset:-8% 0 -8% 0;
+  background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80');
+  background-size:cover;
+  background-position:center;
+  filter:grayscale(100%) contrast(1.15) brightness(.55);
+  will-change:transform;
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(120% 90% at 78% 45%,rgba(225,6,0,.28) 0%,rgba(5,5,5,0) 55%),
+    linear-gradient(100deg,#050505 6%,rgba(5,5,5,.92) 38%,rgba(5,5,5,.55) 68%,rgba(5,5,5,.9) 100%);
+  z-index:1;
+}
+.hero-grid{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 78%);
+}
+.glow{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(120px);
+  z-index:1;
+  pointer-events:none;
+}
+.glow-1{
+  width:460px;height:460px;
+  background:var(--red);
+  opacity:.22;
+  top:-140px;right:-80px;
+  animation:float1 12s ease-in-out infinite;
+}
+.glow-2{
+  width:340px;height:340px;
+  background:#ff5252;
+  opacity:.13;
+  bottom:-120px;left:-100px;
+  animation:float2 15s ease-in-out infinite;
+}
+@keyframes float1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-40px,50px) scale(1.12)}
+}
+@keyframes float2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(50px,-40px) scale(1.15)}
+}
+
+.hero-inner{position:relative;z-index:3;width:100%}
+
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 20px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(8px);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.82);
+  margin-bottom:30px;
+  opacity:0;
+  transform:translateY(20px);
+}
+body.loaded .hero-tag{animation:fadeUp .8s var(--ease) .15s forwards}
+.hero-tag .dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 0 0 rgba(225,6,0,.7);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(225,6,0,.65)}
+  70%{box-shadow:0 0 0 12px rgba(225,6,0,0)}
+  100%{box-shadow:0 0 0 0 rgba(225,6,0,0)}
+}
+
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,10.5vw,8.6rem);
+  line-height:.9;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero-title .line{
+  display:block;
+  overflow:hidden;
+  padding-bottom:.05em;
+}
+.hero-title .line > span{
+  display:block;
+  transform:translateY(112%);
+  opacity:0;
+}
+body.loaded .hero-title .line:nth-child(1) > span{animation:lineUp .95s var(--ease) .3s forwards}
+body.loaded .hero-title .line:nth-child(2) > span{animation:lineUp .95s var(--ease) .42s forwards}
+body.loaded .hero-title .line:nth-child(3) > span{animation:lineUp .95s var(--ease) .54s forwards}
+@keyframes lineUp{to{transform:translateY(0);opacity:1}}
+@keyframes fadeUp{to{transform:translateY(0);opacity:1}}
+
+.hero-title em{
+  font-style:normal;
+  color:var(--red);
+  position:relative;
+  display:inline-block;
+}
+.hero-title em::after{
+  content:'';
+  position:absolute;
+  left:0;bottom:.06em;
+  width:100%;height:.055em;
+  background:var(--red);
+  transform:scaleX(0);
+  transform-origin:left;
+}
+body.loaded .hero-title em::after{animation:underline 1s var(--ease) 1.15s forwards}
+@keyframes underline{to{transform:scaleX(1)}}
+
+.hero-sub{
+  max-width:52ch;
+  color:rgba(255,255,255,.66);
+  font-size:clamp(1rem,1.6vw,1.12rem);
+  margin-bottom:40px;
+  opacity:0;
+  transform:translateY(24px);
+}
+body.loaded .hero-sub{animation:fadeUp .9s var(--ease) .8s forwards}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-bottom:64px;
+  opacity:0;
+  transform:translateY(24px);
+}
+body.loaded .hero-actions{animation:fadeUp .9s var(--ease) .95s forwards}
+
+.hero-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(28px,5vw,64px);
+  padding-top:34px;
+  border-top:1px solid var(--line);
+  opacity:0;
+  transform:translateY(24px);
+}
+body.loaded .hero-stats{animation:fadeUp .9s var(--ease) 1.1s forwards}
+
+.hero-stat b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(1.8rem,3.4vw,2.6rem);
+  line-height:1;
+  letter-spacing:.01em;
+  color:#fff;
+}
+.hero-stat b i{font-style:normal;color:var(--red)}
+.hero-stat span{
+  display:block;
+  margin-top:8px;
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gray-2);
+}
+
+.scroll-hint{
+  position:absolute;
+  left:50%;
+  bottom:26px;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  font-size:.62rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.42);
+  opacity:0;
+}
+body.loaded .scroll-hint{animation:fadeUp .9s var(--ease) 1.4s forwards}
+.scroll-hint i{
+  display:block;
+  width:1px;height:46px;
+  background:linear-gradient(180deg,var(--red),transparent);
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee{
+  position:relative;
+  overflow:hidden;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:var(--black-2);
+  padding:22px 0;
+  z-index:4;
+}
+.marquee::before,
+.marquee::after{
+  content:'';
+  position:absolute;
+  top:0;bottom:0;
+  width:140px;
+  z-index:2;
+  pointer-events:none;
+}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--black),transparent)}
+.marquee::after{right:0;background:linear-gradient(270deg,var(--black),transparent)}
+
+.marquee-track{
+  display:flex;
+  width:max-content;
+  animation:marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{
+  font-family:var(--font-display);
+  font-size:clamp(1.3rem,3vw,2.1rem);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  white-space:nowrap;
+  padding-right:24px;
+  color:rgba(255,255,255,.9);
+}
+.marquee-track span i{
+  font-style:normal;
+  color:var(--red);
+  padding:0 14px;
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   SOBRE
+   ============================================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,90px);
+  align-items:center;
+}
+
+.about-visual{
+  position:relative;
+  aspect-ratio:4/5;
+  max-width:520px;
+}
+.about-img{
+  position:absolute;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--black-3);
+  border:1px solid var(--line);
+}
+.about-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(100%) contrast(1.08);
+  transition:filter .7s ease,transform .9s var(--ease);
+}
+.about-img:hover img{filter:grayscale(0%) contrast(1.05);transform:scale(1.05)}
+
+.about-img.main{
+  inset:0 18% 18% 0;
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.9);
+}
+.about-img.secondary{
+  width:52%;
+  aspect-ratio:1/1;
+  right:0;bottom:0;
+  border-color:rgba(225,6,0,.35);
+  box-shadow:0 30px 60px -30px rgba(225,6,0,.35);
+  z-index:2;
+}
+.about-badge{
+  position:absolute;
+  top:22px;right:-14px;
+  z-index:3;
+  background:var(--red);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:14px;
+  font-family:var(--font-display);
+  font-size:.95rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  line-height:1.15;
+  box-shadow:0 20px 40px -18px rgba(225,6,0,.9);
+  animation:floatBadge 5s ease-in-out infinite;
+}
+.about-badge small{
+  display:block;
+  font-family:var(--font-body);
+  font-size:.58rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  opacity:.85;
+  margin-top:3px;
+}
+@keyframes floatBadge{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+.about-content .sec-text{margin-bottom:26px}
+
+.about-list{
+  display:grid;
+  gap:14px;
+  margin:30px 0 36px;
+}
+.about-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  color:rgba(255,255,255,.78);
+  font-size:.95rem;
+}
+.about-list li svg{
+  flex-shrink:0;
+  width:22px;height:22px;
+  padding:5px;
+  border-radius:50%;
+  background:rgba(225,6,0,.14);
+  color:var(--red-2);
+  margin-top:2px;
+}
+
+.skills{display:grid;gap:20px;margin-bottom:36px}
+.skill-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.8);
+  margin-bottom:10px;
+}
+.skill-top b{color:var(--red-2)}
+.skill-bar{
+  height:5px;
+  background:rgba(255,255,255,.08);
+  border-radius:99px;
+  overflow:hidden;
+}
+.skill-bar i{
+  display:block;
+  height:100%;
+  width:0;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--red-dark),var(--red),var(--red-2));
+  transition:width 1.4s var(--ease);
+}
+
+/* ============================================================
+   SERVIÇOS
+   ============================================================ */
+.services{background:var(--black-2);position:relative;overflow:hidden}
+.services::before{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  background:var(--red);
+  filter:blur(200px);
+  opacity:.07;
+  top:-200px;left:-200px;
+  pointer-events:none;
+}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+.service-card{
+  position:relative;
+  padding:38px 32px 34px;
+  background:linear-gradient(180deg,var(--black-3),var(--black-2));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:transform .5s var(--ease),border-color .5s ease,box-shadow .5s ease;
+  transform-style:preserve-3d;
+}
+.service-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(225,6,0,.16),transparent 45%);
+  opacity:0;
+  transition:opacity .45s ease;
+  pointer-events:none;
+}
+.service-card:hover::before{opacity:1}
+.service-card:hover{
+  border-color:rgba(225,6,0,.5);
+  box-shadow:0 40px 70px -40px rgba(225,6,0,.6);
+}
+
+.service-num{
+  position:absolute;
+  top:22px;right:26px;
+  font-family:var(--font-display);
+  font-size:3.2rem;
+  line-height:1;
+  color:rgba(255,255,255,.05);
+  transition:color .5s ease,transform .5s var(--ease);
+}
+.service-card:hover .service-num{
+  color:rgba(225,6,0,.22);
+  transform:scale(1.1);
+}
+
+.service-icon{
+  width:60px;height:60px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:rgba(225,6,0,.12);
+  border:1px solid rgba(225,6,0,.28);
+  color:var(--red-2);
+  margin-bottom:24px;
+  transition:background .45s ease,transform .55s var(--ease),color .45s ease;
+}
+.service-icon svg{width:26px;height:26px}
+.service-card:hover .service-icon{
+  background:var(--red);
+  color:#fff;
+  transform:translateY(-4px) rotate(-6deg);
+}
+
+.service-card h3{
+  font-family:var(--font-display);
+  font-size:1.35rem;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  font-weight:400;
+  margin-bottom:12px;
+}
+.service-card p{
+  color:var(--gray);
+  font-size:.94rem;
+  margin-bottom:22px;
+}
+.service-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--red-2);
+  transition:gap .4s var(--ease),color .3s ease;
+}
+.service-link svg{width:14px;height:14px}
+.service-card:hover .service-link{gap:14px;color:#fff}
+
+/* ============================================================
+   STATS / NÚMEROS
+   ============================================================ */
+.stats-band{
+  position:relative;
+  padding:clamp(60px,8vw,90px) 0;
+  background:
+    linear-gradient(rgba(5,5,5,.9),rgba(5,5,5,.94)),
+    url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:40px;
+  text-align:center;
+}
+.stat b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  line-height:1;
+  letter-spacing:-.01em;
+  background:linear-gradient(180deg,#fff 30%,#8a8a8a);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.stat b i{font-style:normal;color:var(--red);-webkit-text-fill-color:var(--red)}
+.stat span{
+  display:block;
+  margin-top:12px;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gray-2);
+}
+
+/* ============================================================
+   RESULTADOS
+   ============================================================ */
+.results-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.result-card{
+  position:relative;
+  aspect-ratio:3/4;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--black-3);
+}
+.result-card:nth-child(1){grid-row:span 2;aspect-ratio:3/8.15}
+.result-card img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(100%) brightness(.78);
+  transition:transform 1s var(--ease),filter .7s ease;
+}
+.result-card:hover img{
+  transform:scale(1.08);
+  filter:grayscale(0%) brightness(.95);
+}
+.result-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:24px;
+  background:linear-gradient(180deg,transparent 42%,rgba(5,5,5,.94));
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s var(--ease);
+}
+.result-card:hover .result-overlay{opacity:1;transform:translateY(0)}
+.result-overlay h4{
+  font-family:var(--font-display);
+  font-size:1.1rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-weight:400;
+}
+.result-overlay p{
+  font-size:.78rem;
+  color:var(--red-2);
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-top:4px;
+}
+
+/* ============================================================
+   PLANOS
+   ============================================================ */
+.plans{background:var(--black-2);position:relative;overflow:hidden}
+.plans::after{
+  content:'';
+  position:absolute;
+  width:560px;height:560px;
+  background:var(--red);
+  filter:blur(220px);
+  opacity:.08;
+  bottom:-240px;right:-180px;
+  pointer-events:none;
+}
+
+.plans-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+  align-items:stretch;
+}
+
+.plan{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:40px 34px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--black-3),rgba(11,11,11,.6));
+  transition:transform .5s var(--ease),border-color .5s ease,box-shadow .5s ease;
+}
+.plan:hover{
+  transform:translateY(-8px);
+  border-color:rgba(225,6,0,.45);
+  box-shadow:0 50px 80px -50px rgba(225,6,0,.75);
+}
+.plan.featured{
+  border-color:rgba(225,6,0,.6);
+  background:linear-gradient(180deg,rgba(225,6,0,.12),rgba(11,11,11,.9) 55%);
+  box-shadow:0 40px 90px -50px rgba(225,6,0,.85);
+}
+.plan.featured::before{
+  content:'MAIS ESCOLHIDO';
+  position:absolute;
+  top:-1px;left:50%;
+  transform:translate(-50%,-50%);
+  background:var(--red);
+  color:#fff;
+  font-size:.6rem;
+  font-weight:800;
+  letter-spacing:.2em;
+  padding:7px 18px;
+  border-radius:999px;
+  white-space:nowrap;
+  box-shadow:0 12px 26px -10px rgba(225,6,0,1);
+}
+
+.plan-name{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-weight:400;
+  margin-bottom:6px;
+}
+.plan-desc{
+  font-size:.84rem;
+  color:var(--gray-2);
+  margin-bottom:26px;
+}
+.plan-price{
+  display:flex;
+  align-items:flex-end;
+  gap:6px;
+  padding-bottom:26px;
+  margin-bottom:26px;
+  border-bottom:1px solid var(--line);
+}
+.plan-price small{
+  font-size:.8rem;
+  color:var(--gray-2);
+  font-weight:600;
+  margin-bottom:9px;
+}
+.plan-price strong{
+  font-family:var(--font-display);
+  font-size:2.9rem;
+  line-height:1;
+  letter-spacing:-.01em;
+  font-weight:400;
+}
+.plan-price em{
+  font-style:normal;
+  font-size:.8rem;
+  color:var(--gray-2);
+  margin-bottom:8px;
+}
+
+.plan-features{
+  display:grid;
+  gap:13px;
+  margin-bottom:34px;
+  flex:1;
+}
+.plan-features li{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:.9rem;
+  color:rgba(255,255,255,.78);
+}
+.plan-features li.off{color:var(--gray-2);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.2)}
+.plan-features svg{
+  width:18px;height:18px;
+  flex-shrink:0;
+  color:var(--red-2);
+}
+.plan-features li.off svg{color:var(--gray-2)}
+
+.plan .btn{width:100%}
+
+/* ============================================================
+   DEPOIMENTOS
+   ============================================================ */
+.testimonials{position:relative;overflow:hidden}
+
+.slider{
+  position:relative;
+  max-width:900px;
+  margin:0 auto;
+}
+.slides{
+  position:relative;
+  min-height:330px;
+}
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(24px) scale(.98);
+  transition:opacity .6s var(--ease),transform .6s var(--ease),visibility .6s;
+  text-align:center;
+  padding:0 10px;
+}
+.slide.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+}
+
+.slide-quote{
+  font-family:var(--font-display);
+  font-size:5rem;
+  line-height:.6;
+  color:var(--red);
+  opacity:.4;
+  margin-bottom:24px;
+}
+.slide p{
+  font-size:clamp(1.05rem,2.2vw,1.4rem);
+  line-height:1.6;
+  color:rgba(255,255,255,.9);
+  font-weight:300;
+  margin-bottom:32px;
+}
+.slide-author{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.slide-author img{
+  width:54px;height:54px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--red);
+  filter:grayscale(100%);
+}
+.slide-author b{
+  display:block;
+  font-size:.92rem;
+  letter-spacing:.04em;
+}
+.slide-author span{
+  display:block;
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--red-2);
+  margin-top:2px;
+}
+
+.slider-nav{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:22px;
+  margin-top:44px;
+}
+.slider-btn{
+  width:52px;height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  transition:background .35s ease,border-color .35s ease,transform .35s var(--ease);
+}
+.slider-btn:hover{
+  background:var(--red);
+  border-color:var(--red);
+  transform:scale(1.08);
+}
+.slider-btn svg{width:18px;height:18px}
+
+.dots{display:flex;gap:9px}
+.dot{
+  width:9px;height:9px;
+  border-radius:50%;
+  background:rgba(255,255,255,.2);
+  border:none;
+  cursor:pointer;
+  padding:0;
+  transition:background .35s ease,transform .35s var(--ease),width .35s var(--ease);
+}
+.dot.active{
+  background:var(--red);
+  width:28px;
+  border-radius:99px;
+}
+
+/* ============================================================
+   CONTATO
+   ============================================================ */
+.contact{background:var(--black-2);position:relative;overflow:hidden}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  gap:clamp(40px,6vw,80px);
+  align-items:start;
+}
+
+.contact-info .sec-text{margin-bottom:34px}
+
+.contact-items{display:grid;gap:18px;margin-bottom:36px}
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.02);
+  transition:border-color .4s ease,background .4s ease,transform .4s var(--ease);
+}
+.contact-item:hover{
+  border-color:rgba(225,6,0,.45);
+  background:rgba(225,6,0,.06);
+  transform:translateX(6px);
+}
+.contact-item .ci-icon{
+  width:46px;height:46px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:rgba(225,6,0,.14);
+  color:var(--red-2);
+}
+.contact-item .ci-icon svg{width:20px;height:20px}
+.contact-item small{
+  display:block;
+  font-size:.64rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gray-2);
+  margin-bottom:3px;
+}
+.contact-item b{font-size:.95rem;font-weight:600}
+
+.socials{display:flex;gap:12px}
+.social{
+  width:46px;height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  border:1px solid var(--line);
+  color:rgba(255,255,255,.75);
+  transition:background .35s ease,color .35s ease,border-color .35s ease,transform .4s var(--ease);
+}
+.social:hover{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+  transform:translateY(-4px);
+}
+.social svg{width:19px;height:19px}
+
+.form{
+  padding:clamp(28px,4vw,44px);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--black-3),rgba(5,5,5,.7));
+}
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.field{position:relative;margin-bottom:20px}
+.field label{
+  display:block;
+  font-size:.66rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gray-2);
+  margin-bottom:9px;
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:15px 18px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:#fff;
+  font-size:.94rem;
+  outline:none;
+  transition:border-color .35s ease,background .35s ease,box-shadow .35s ease;
+  appearance:none;
+}
+.field textarea{resize:vertical;min-height:120px}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239b9b9b' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 18px center;
+  padding-right:44px;
+}
+.field select option{background:#111;color:#fff}
+.field input::placeholder,
+.field textarea::placeholder{color:#5c5c5c}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--red);
+  background:rgba(225,6,0,.05);
+  box-shadow:0 0 0 4px rgba(225,6,0,.1);
+}
+.field.error input,
+.field.error select,
+.field.error textarea{border-color:#ff3b3b}
+.field .err{
+  display:block;
+  font-size:.7rem;
+  color:#ff5a5a;
+  margin-top:6px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+}
+.field.error .err{max-height:30px}
+
+.form .btn{width:100%;margin-top:8px}
+
+.form-success{
+  display:none;
+  align-items:center;
+  gap:12px;
+  margin-top:18px;
+  padding:14px 18px;
+  border-radius:12px;
+  background:rgba(37,180,90,.12);
+  border:1px solid rgba(37,180,90,.4);
+  color:#4ade80;
+  font-size:.86rem;
+  font-weight:600;
+}
+.form-success.show{display:flex;animation:fadeUp .5s var(--ease) forwards;opacity:0;transform:translateY(10px)}
+.form-success svg{width:20px;height:20px;flex-shrink:0}
+
+/* ============================================================
+   CTA FINAL
+   ============================================================ */
+.cta-band{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(70px,9vw,110px) 0;
+  background:linear-gradient(120deg,var(--red-dark),var(--red) 45%,#7a0200);
+  text-align:center;
+}
+.cta-band::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(0,0,0,.14) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.14) 1px,transparent 1px);
+  background-size:56px 56px;
+  opacity:.5;
+}
+.cta-band .container{position:relative;z-index:2}
+.cta-band h2{
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,5.5vw,4rem);
+  line-height:1.05;
+  text-transform:uppercase;
+  letter-spacing:-.01em;
+  margin-bottom:18px;
+}
+.cta-band p{
+  color:rgba(255,255,255,.85);
+  max-width:56ch;
+  margin:0 auto 34px;
+  font-size:1.02rem;
+}
+.cta-band .btn{
+  background:#050505;
+  color:#fff;
+  box-shadow:0 20px 44px -18px rgba(0,0,0,.85);
+}
+.cta-band .btn::before{
+  background:linear-gradient(120deg,#1a1a1a,#000);
+}
+.cta-band .btn:hover{box-shadow:0 26px 54px -18px rgba(0,0,0,1)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background:var(--black);
+  border-top:1px solid var(--line);
+  padding:70px 0 30px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr;
+  gap:44px;
+  padding-bottom:50px;
+  border-bottom:1px solid var(--line);
+}
+.footer-brand .logo{font-size:1.8rem;margin-bottom:16px;display:inline-block}
+.footer-brand p{
+  color:var(--gray-2);
+  font-size:.9rem;
+  max-width:38ch;
+  margin-bottom:24px;
+}
+.footer h4{
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--red-2);
+  margin-bottom:22px;
+}
+.footer ul{display:grid;gap:12px}
+.footer ul a{
+  font-size:.9rem;
+  color:rgba(255,255,255,.62);
+  transition:color .3s ease,padding-left .35s var(--ease);
+  display:inline-block;
+}
+.footer ul a:hover{color:#fff;padding-left:6px}
+
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+  padding-top:28px;
+  font-size:.78rem;
+  color:var(--gray-2);
+}
+.footer-bottom b{color:var(--red-2)}
+
+/* ============================================================
+   VOLTAR AO TOPO
+   ============================================================ */
+.to-top{
+  position:fixed;
+  right:26px;
+  bottom:26px;
+  width:50px;height:50px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(225,6,0,.45);
+  background:rgba(225,6,0,.9);
+  color:#fff;
+  cursor:pointer;
+  z-index:8000;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(18px);
+  transition:opacity .4s ease,visibility .4s ease,transform .4s var(--ease),background .3s ease;
+  backdrop-filter:blur(8px);
+}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+.to-top:hover{background:var(--red-2);transform:translateY(-4px) scale(1.06)}
+.to-top svg{width:20px;height:20px}
+
+/* ============================================================
+   ANIMAÇÕES DE REVELAÇÃO
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(42px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+  transition-delay:var(--d,0s);
+  will-change:opacity,transform;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+.reveal-left{transform:translateX(-52px)}
+.reveal-left.in{transform:translateX(0)}
+.reveal-right{transform:translateX(52px)}
+.reveal-right.in{transform:translateX(0)}
+.reveal-scale{transform:scale(.92);opacity:0}
+.reveal-scale.in{transform:scale(1);opacity:1}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:1024px){
+  .about-grid{grid-template-columns:1fr;gap:60px}
+  .about-visual{max-width:460px;margin:0 auto}
+  .contact-grid{grid-template-columns:1fr;gap:50px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:38px}
+  .footer-brand{grid-column:1/-1}
+  .results-grid{grid-template-columns:repeat(2,1fr)}
+  .result-card:nth-child(1){grid-row:span 1;aspect-ratio:3/4}
+}
+
+@media (max-width:860px){
+  .nav-links{
+    position:fixed;
+    inset:0;
+    flex-direction:column;
+    justify-content:center;
+    gap:26px;
+    background:rgba(5,5,5,.97);
+    backdrop-filter:blur(20px);
+    transform:translateX(100%);
+    transition:transform .55s var(--ease);
+    z-index:8500;
+  }
+  .nav-links.open{transform:translateX(0)}
+  .nav-links a{
+    font-family:var(--font-display);
+    font-size:1.9rem;
+    letter-spacing:.05em;
+    color:#fff;
+  }
+  .nav-links a::after{height:2px}
+  .nav-cta{display:none}
+  .burger{display:block;z-index:9000}
+  .nav-inner{position:relative;z-index:9001}
+}
+
+@media (max-width:640px){
+  .section{padding:70px 0}
+  .hero{padding:120px 0 50px;min-height:auto}
+  .hero-stats{gap:26px}
+  .hero-stat{flex:1 1 40%}
+  .hero-actions .btn{width:100%}
+  .marquee{padding:16px 0}
+  .results-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .slider-nav{gap:14px}
+  .slides{min-height:390px}
+  .to-top{right:16px;bottom:16px;width:44px;height:44px}
+  .about-badge{right:0;font-size:.82rem;padding:12px 16px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div class="preloader" id="preloader">
+  <div class="preloader-logo">MARCOS<span>.</span></div>
+  <div class="preloader-bar"><i id="preBar"></i></div>
+</div>
+
+<!-- ===== CURSOR ===== -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ===== PROGRESSO ===== -->
+<div class="scroll-progress" id="progress"></div>
+
+<!-- ===== NAVBAR ===== -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo" data-cursor>MARCOS<span>.</span></a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" data-cursor>Início</a>
+      <a href="#sobre" data-cursor>Sobre</a>
+      <a href="#servicos" data-cursor>Serviços</a>
+      <a href="#resultados" data-cursor>Resultados</a>
+      <a href="#planos" data-cursor>Planos</a>
+      <a href="#contato" data-cursor>Contato</a>
+    </nav>
+
+    <a href="#contato" class="btn btn-primary nav-cta" data-cursor>Agendar</a>
+
+    <button class="burger" id="burger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      CREF 048.712-G · Personal Trainer
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line"><span>Transforme</span></span>
+      <span class="line"><span>seu <em>corpo</em></span></span>
+      <span class="line"><span>e sua mente</span></span>
+    </h1>
+
+    <p class="hero-sub">
+      Treinos 100% personalizados, acompanhamento próximo e método comprovado.
+      Mais de 500 alunos já mudaram de vida — o próximo pode ser você.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contato" class="btn btn-primary" data-cursor>
+        Agendar avaliação
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#planos" class="btn btn-ghost" data-cursor>Ver planos</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <b><span class="count" data-count="500">0</span><i>+</i></b>
+        <span>Alunos transformados</span>
+      </div>
+      <div class="hero-stat">
+        <b><span class="count" data-count="10">0</span><i>+</i></b>
+        <span>Anos de experiência</span>
+      </div>
+      <div class="hero-stat">
+        <b><span class="count" data-count="4.9" data-decimals="1">0</span><i>★</i></b>
+        <span>Avaliação média</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <i></i>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Treino <i>•</i> Disciplina <i>•</i> Foco <i>•</i> Resultado <i>•</i> Saúde <i>•</i> Performance <i>•</i> Constância <i>•</i> </span>
+    <span aria-hidden="true">Treino <i>•</i> Disciplina <i>•</i> Foco <i>•</i> Resultado <i>•</i> Saúde <i>•</i> Performance <i>•</i> Constância <i>•</i> </span>
+  </div>
+</div>
+
+<!-- ===== SOBRE ===== -->
+<section class="section" id="sobre">
+  <div class="container about-grid">
+
+    <div class="about-visual reveal reveal-left" data-cursor>
+      <div class="about-img main">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80" alt="Marcos, personal trainer">
+      </div>
+      <div class="about-img secondary">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80" alt="Treino de força">
+      </div>
+      <div class="about-badge">
+        10 anos
+        <small>de experiência</small>
+      </div>
+    </div>
+
+    <div class="about-content">
+      <span class="eyebrow reveal">Sobre mim</span>
+      <h2 class="sec-title reveal" style="--d:.05s">
+        Muito além de<br>um <em>personal</em>
+      </h2>
+      <p class="sec-text reveal" style="--d:.1s;margin-top:22px">
+        Sou Marcos, personal trainer formado em Educação Física com especialização em
+        treinamento de força e hipertrofia. Meu trabalho é construir um plano que caiba
+        na sua rotina — e que traga resultado de verdade, sem enrolação.
+      </p>
+
+      <ul class="about-list">
+        <li class="reveal" style="--d:.15s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Periodização individual por objetivo</span>
+        </li>
+        <li class="reveal" style="--d:.2s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Acompanhamento de cargas e evolução semanal</span>
+        </li>
+        <li class="reveal" style="--d:.25s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Orientação nutricional em parceria com nutricionista</span>
+        </li>
+        <li class="reveal" style="--d:.3s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Suporte direto no WhatsApp todos os dias</span>
+        </li>
+      </ul>
+
+      <div class="skills">
+        <div class="skill reveal" style="--d:.1s">
+          <div class="skill-top"><span>Hipertrofia &amp; Força</span><b>98%</b></div>
+          <div class="skill-bar"><i data-width="98%"></i></div>
+        </div>
+        <div class="skill reveal" style="--d:.18s">
+          <div class="skill-top"><span>Emagrecimento</span><b>95%</b></div>
+          <div class="skill-bar"><i data-width="95%"></i></div>
+        </div>
+        <div class="skill reveal" style="--d:.26s">
+          <div class="skill-top"><span>Condicionamento &amp; Performance</span><b>92%</b></div>
+          <div class="skill-bar"><i data-width="92%"></i></div>
+        </div>
+      </div>
+
+      <a href="#contato" class="btn btn-primary reveal" style="--d:.34s" data-cursor>
+        Quero começar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SERVIÇOS ===== -->
+<section class="section services" id="servicos">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow reveal">O que eu faço</span>
+      <h2 class="sec-title reveal" style="--d:.05s">Serviços <em>exclusivos</em></h2>
+      <p class="sec-text reveal" style="--d:.1s">
+        Cada serviço foi desenhado para tirar você da estagnação e levar ao próximo nível.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <article class="service-card reveal" data-tilt style="--d:.05s" data-cursor>
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16M18 4v16M3 9h18M3 15h18"/></svg>
+        </div>
+        <h3>Treino Personalizado</h3>
+        <p>Programa montado exclusivamente para o seu corpo, sua rotina e seu objetivo — com ajustes a cada 4 semanas.</p>
+        <span class="service-link">
+          Saiba mais
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service-card reveal" data-tilt style="--d:.13s" data-cursor>
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+        </div>
+        <h3>Consultoria Online</h3>
+        <p>Treine de onde estiver com planilhas detalhadas, vídeos de execução e suporte direto no WhatsApp.</p>
+        <span class="service-link">
+          Saiba mais
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service-card reveal" data-tilt style="--d:.21s" data-cursor>
+        <span class="service-num">03</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Avaliação Física</h3>
+        <p>Bioimpedância, perimetria e análise postural para medir com precisão cada etapa da sua evolução.</p>
+        <span class="service-link">
+          Saiba mais
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service-card reveal" data-tilt style="--d:.29s" data-cursor>
+        <span class="service-num">04</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg>
+        </div>
+        <h3>Nutrição Esportiva</h3>
+        <p>Parceria com nutricionista esportiva para alinhar dieta e treino e acelerar seus resultados.</p>
+        <span class="service-link">
+          Saiba mais
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== NÚMEROS ===== -->
+<section class="stats-band">
+  <div class="container stats-grid">
+    <div class="stat reveal">
+      <b><span class="count" data-count="500">0</span><i>+</i></b>
+      <span>Alunos atendidos</span>
+    </div>
+    <div class="stat reveal" style="--d:.08s">
+      <b><span class="count" data-count="12000">0</span><i>+</i></b>
+      <span>Treinos prescritos</span>
+    </div>
+    <div class="stat reveal" style="--d:.16s">
+      <b><span class="count" data-count="10">0</span><i>+</i></b>
+      <span>Anos de estrada</span>
+    </div>
+    <div class="stat reveal" style="--d:.24s">
+      <b><span class="count" data-count="98">0</span><i>%</i></b>
+      <span>Alunos satisfeitos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTADOS ===== -->
+<section class="section" id="resultados">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow reveal">Resultados reais</span>
+      <h2 class="sec-title reveal" style="--d:.05s">Quem treina, <em>evolui</em></h2>
+      <p class="sec-text reveal" style="--d:.1s">
+        Passe o mouse sobre as imagens para conhecer algumas das histórias que acompanhei de perto.
+      </p>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card reveal-scale" data-cursor>
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=700&q=80" alt="Transformação 1">
+        <div class="result-overlay">
+          <h4>Rafael M.</h4>
+          <p>-18kg em 6 meses</p>
+        </div>
+      </div>
+      <div class="result-card reveal-scale" style="--d:.08s" data-cursor>
+        <img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?auto=format&fit=crop&w=700&q=80" alt="Transformação 2">
+        <div class="result-overlay">
+          <h4>Juliana S.</h4>
+          <p>Hipertrofia +8kg</p>
+        </div>
+      </div>
+      <div class="result-card reveal-scale" style="--d:.16s" data-cursor>
+        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=700&q=80" alt="Transformação 3">
+        <div class="result-overlay">
+          <h4>Diego A.</h4>
+          <p>Força e definição</p>
+        </div>
+      </div>
+      <div class="result-card reveal-scale" style="--d:.24s" data-cursor>
+        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=700&q=80" alt="Transformação 4">
+        <div class="result-overlay">
+          <h4>Camila R.</h4>
+          <p>Condicionamento total</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLANOS ===== -->
+<section class="section plans" id="planos">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow reveal">Planos</span>
+      <h2 class="sec-title reveal" style="--d:.05s">Escolha o seu <em>nível</em></h2>
+      <p class="sec-text reveal" style="--d:.1s">
+        Sem taxa de matrícula, sem fidelidade. Você cancela quando quiser.
+      </p>
+    </div>
+
+    <div class="plans-grid">
+
+      <article class="plan reveal" style="--d:.05s" data-cursor>
+        <h3 class="plan-name">Start</h3>
+        <p class="plan-desc">Para quem está começando agora</p>
+        <div class="plan-price">
+          <small>R$</small>
+          <strong>199</strong>
+          <em>/mês</em>
+        </div>
+        <ul class="plan-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Treino mensal personalizado</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> App com vídeos de execução</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Avaliação física inicial</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg> Suporte diário no WhatsApp</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg> Plano nutricional</li>
+        </ul>
+        <a href="#contato" class="btn btn-ghost" data-cursor>Começar agora</a>
+      </article>
+
+      <article class="plan featured reveal" style="--d:.13s" data-cursor>
+        <h3 class="plan-name">Pro</h3>
+        <p class="plan-desc">O mais completo para resultados rápidos</p>
+        <div class="plan-price">
+          <small>R$</small>
+          <strong>349</strong>
+          <em>/mês</em>
+        </div>
+        <ul class="plan-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Treino ajustado a cada 15 dias</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> App + análise de vídeos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Avaliações mensais completas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Suporte diário no WhatsApp</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Plano nutricional incluso</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary" data-cursor>
+          Quero o Pro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+
+      <article class="plan reveal" style="--d:.21s" data-cursor>
+        <h3 class="plan-name">Elite</h3>
+        <p class="plan-desc">Acompanhamento presencial premium</p>
+        <div class="plan-price">
+          <small>R$</small>
+          <strong>599</strong>
+          <em>/mês</em>
+        </div>
+        <ul class="plan-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 12 sessões presenciais/mês</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Treino ajustado semanalmente</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Acompanhamento nutricional</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Suporte prioritário 24/7</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Relatório de performance mensal</li>
+        </ul>
+        <a href="#contato" class="btn btn-ghost" data-cursor>Falar com Marcos</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEPOIMENTOS ===== -->
+<section class="section testimonials" id="depoimentos">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow reveal">Depoimentos</span>
+      <h2 class="sec-title reveal" style="--d:.05s">O que dizem <em>os alunos</em></h2>
+    </div>
+
+    <div class="slider reveal" style="--d:.1s">
+      <div class="slides" id="slides">
+
+        <div class="slide active">
+          <div class="slide-quote">&ldquo;</div>
+          <p>Em seis meses com o Marcos eu perdi 18kg e ganhei uma rotina que nunca tive. Ele não passa treino, ele muda a forma como você enxerga o treino.</p>
+          <div class="slide-author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" alt="Rafael M.">
+            <div style="text-align:left">
+              <b>Rafael Martins</b>
+              <span>Aluno há 1 ano</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-quote">&ldquo;</div>
+          <p>Sempre tive medo de musculação. O Marcos montou um plano respeitando meu tempo e hoje eu treino com uma confiança que jamais imaginei.</p>
+          <div class="slide-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Juliana S.">
+            <div style="text-align:left">
+              <b>Juliana Souza</b>
+              <span>Aluna há 8 meses</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-quote">&ldquo;</div>
+          <p>A consultoria online funciona perfeitamente. Recebo o treino, mando os vídeos e tenho correção de execução no mesmo dia. Suporte absurdo.</p>
+          <div class="slide-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Diego A.">
+            <div style="text-align:left">
+              <b>Diego Almeida</b>
+              <span>Aluno há 2 anos</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="slider-nav">
+        <button class="slider-btn" id="prevBtn" aria-label="Anterior" data-cursor>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="dots" id="dots"></div>
+        <button class="slider-btn" id="nextBtn" aria-label="Próximo" data-cursor>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTATO ===== -->
+<section class="section contact" id="contato">
+  <div class="container contact-grid">
+
+    <div class="contact-info">
+      <span class="eyebrow reveal">Contato</span>
+      <h2 class="sec-title reveal" style="--d:.05s">Vamos começar <em>hoje</em></h2>
+      <p class="sec-text reveal" style="--d:.1s;margin-top:20px">
+        Preencha o formulário e eu entro em contato em até 24 horas para agendarmos
+        sua avaliação física gratuita. Sem compromisso.
+      </p>
+
+      <div class="contact-items">
+        <a href="https://wa.me/5511999999999" class="contact-item reveal" style="--d:.15s" data-cursor>
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <div>
+            <small>WhatsApp</small>
+            <b>(11) 99999-9999</b>
+          </div>
+        </a>
+
+        <a href="mailto:contato@marcospersonal.com" class="contact-item reveal" style="--d:.2s" data-cursor>
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+          </span>
+          <div>
+            <small>E-mail</small>
+            <b>contato@marcospersonal.com</b>
+          </div>
+        </a>
+
+        <div class="contact-item reveal" style="--d:.25s" data-cursor>
+          <span class="ci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <div>
+            <small>Localização</small>
+            <b>São Paulo · SP</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="socials reveal" style="--d:.3s">
+        <a href="#" class="social" aria-label="Instagram" data-cursor>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" class="social" aria-label="YouTube" data-cursor>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 7.2a3 3 0 0 0-2.1-2.1C18.5 4.6 12 4.6 12 4.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 7.2 31 31 0 0 0 1 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23 12a31 31 0 0 0-.5-4.8z"/><path d="M9.8 15.2V8.8l5.5 3.2-5.5 3.2z"/></svg>
+        </a>
+        <a href="#" class="social" aria-label="TikTok" data-cursor>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3v10.5a4.5 4.5 0 1 1-4.5-4.5"/><path d="M16 3a5 5 0 0 0 5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <form class="form reveal reveal-right" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+          <span class="err">Informe seu nome.</span>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="voce@email.com" required>
+          <span class="err">Informe um e-mail válido.</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="telefone">WhatsApp</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+          <span class="err">Informe seu telefone.</span>
+        </div>
+        <div class="field">
+          <label for="objetivo">Objetivo</label>
+          <select id="objetivo" name="objetivo" required>
+            <option value="">Selecione...</option>
+            <option>Emagrecimento</option>
+            <option>Hipertrofia</option>
+            <option>Condicionamento físico</option>
+            <option>Reabilitação / saúde</option>
+            <option>Performance esportiva</option>
+          </select>
+          <span class="err">Selecione um objetivo.</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre sua rotina e o que busca..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" data-cursor>
+        Enviar mensagem
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+
+      <div class="form-success" id="formSuccess">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+        <span>Mensagem enviada! Entrarei em contato em até 24h.</span>
+      </div>
+    </form>
+
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="cta-band">
+  <div class="container">
+    <h2 class="reveal">A disciplina pesa<br>menos que o arrependimento</h2>
+    <p class="reveal" style="--d:.08s">Dê o primeiro passo hoje. A primeira avaliação é gratuita e sem compromisso.</p>
+    <a href="https://wa.me/5511999999999" class="btn reveal" style="--d:.16s" data-cursor>
+      Falar no WhatsApp
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo" data-cursor>MARCOS<span>.</span></a>
+        <p>Personal trainer especializado em transformação corporal com método, ciência e acompanhamento de verdade.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Instagram" data-cursor>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="social" aria-label="YouTube" data-cursor>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 7.2a3 3 0 0 0-2.1-2.1C18.5 4.6 12 4.6 12 4.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 7.2 31 31 0 0 0 1 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23 12a31 31 0 0 0-.5-4.8z"/><path d="M9.8 15.2V8.8l5.5 3.2-5.5 3.2z"/></svg>
+          </a>
+          <a href="#" class="social" aria-label="TikTok" data-cursor>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3v10.5a4.5 4.5 0 1 1-4.5-4.5"/><path d="M16 3a5 5 0 0 0 5 5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#home" data-cursor>Início</a></li>
+          <li><a href="#sobre" data-cursor>Sobre</a></li>
+          <li><a href="#servicos" data-cursor>Serviços</a></li>
+          <li><a href="#planos" data-cursor>Planos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Atendimento</h4>
+        <ul>
+          <li><a href="https://wa.me/5511999999999" data-cursor>(11) 99999-9999</a></li>
+          <li><a href="mailto:contato@marcospersonal.com" data-cursor>contato@marcospersonal.com</a></li>
+          <li><a href="#contato" data-cursor>São Paulo · SP</a></li>
+          <li><a href="#contato" data-cursor>Seg a Sáb · 6h às 21h</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Marcos Personal Trainer. Todos os direitos reservados.</span>
+      <span>CREF 048.712-G · Feito com <b>disciplina</b>.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== VOLTAR AO TOPO ===== -->
+<button class="to-top" id="toTop" aria-label="Voltar ao topo" data-cursor>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const body = document.body;
+  const isFine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============================================================
+     PRELOADER
+     ============================================================ */
+  const preloader = document.getElementById('preloader');
+  const preBar = document.getElementById('preBar');
+  let progress = 0;
+
+  const fakeProgress = setInterval(() => {
+    progress = Math.min(progress + Math.random() * 18, 92);
+    preBar.style.width = progress + '%';
+  }, 130);
+
+  function finishLoad() {
+    clearInterval(fakeProgress);
+    preBar.style.width = '100%';
+    setTimeout(() => {
+      preloader.classList.add('done');
+      body.classList.add('loaded');
+    }, 420);
+  }
+
+  window.addEventListener('load', () => setTimeout(finishLoad, 350));
+  // Fallback caso 'load' demore
+  setTimeout(() => {
+    if (!body.classList.contains('loaded')) finishLoad();
+  }, 3500);
+
+  /* ============================================================
+     CURSOR PERSONALIZADO
+     ============================================================ */
+  if (isFine && !reduceMotion) {
+    const cursor = document.getElementById('cursor');
+    const dot = document.getElementById('cursorDot');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let cx = mx, cy = my;
+
+    body.classList.add('cursor-ready');
+
+    window.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.transform = `translate(${mx}px, ${my}px)`;
+    });
+
+    function loop() {
+      cx += (mx - cx) * 0.16;
+      cy += (my - cy) * 0.16;
+      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    document.addEventListener('mouseleave', () => cursor.classList.add('hide'));
+    document.addEventListener('mouseenter', () => cursor.classList.remove('hide'));
+
+    const hoverables = 'a, button, [data-cursor], input, textarea, select, .service-card, .plan, .result-card';
+    document.querySelectorAll(hoverables).forEach((el) => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    });
+  }
+
+  /* ============================================================
+     BARRA DE PROGRESSO + NAV + VOLTAR AO TOPO
+     ============================================================ */
+  const nav = document.getElementById('nav');
+  const progressBar = document.getElementById('progress');
+  const toTop = document.getElementById('toTop');
+  const heroBg = document.getElementById('heroBg');
+
+  function onScroll() {
+    const y = window.scrollY;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h > 0 ? (y / h) * 100 : 0;
+
+    progressBar.style.width = pct + '%';
+    nav.classList.toggle('scrolled', y > 40);
+    toTop.classList.toggle('show', y > 600);
+
+    // Parallax do hero
+    if (heroBg && y < window.innerHeight * 1.2 && !reduceMotion) {
+      heroBg.style.transform = `translate3d(0, ${y * 0.28}px, 0) scale(1.06)`;
+    }
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  /* ============================================================
+     MENU MOBILE
+     ============================================================ */
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    navLinks.classList.toggle('open', open);
+    body.classList.toggle('no-scroll', open);
+    burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  });
+
+  navLinks.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      body.classList.remove('no-scroll');
+    });
+  });
+
+  /* ============================================================
+     REVEAL ON SCROLL
+     ============================================================ */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('in'));
+  }
+
+  /* ============================================================
+     CONTADORES ANIMADOS
+     ============================================================ */
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const duration = 1800;
+    const start = performance.now();
+
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = target * eased;
+      el.textContent = decimals
+        ? value.toFixed(decimals).replace('.', ',')
+        : Math.floor(value).toLocaleString('pt-BR');
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = decimals
+        ? target.toFixed(decimals).replace('.', ',')
+        : target.toLocaleString('pt-BR');
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counters = document.querySelectorAll('.count');
+  if ('IntersectionObserver' in window) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          cio.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach((c) => cio.observe(c));
+  } else {
+    counters.forEach((c) => {
+      c.textContent = c.dataset.count;
+    });
+  }
+
+  /* ============================================================
+     BARRAS DE HABILIDADE
+     ============================================================ */
+  const skillBars = document.querySelectorAll('.skill-bar i');
+  if ('IntersectionObserver' in window) {
+    const sio = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          setTimeout(() => { el.style.width = el.dataset.width; }, 220);
+          sio.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    skillBars.forEach((b) => sio.observe(b));
+  } else {
+    skillBars.forEach((b) => { b.style.width = b.dataset.width; });
+  }
+
+  /* ============================================================
+     TILT 3D NOS CARDS DE SERVIÇO
+     ============================================================ */
+  if (isFine && !reduceMotion) {
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+
+        card.style.setProperty('--mx', (px * 100) + '%');
+        card.style.setProperty('--my', (py * 100) + '%');
+
+        const rx = (0.5 - py) * 7;
+        const ry = (px - 0.5) * 7;
+        card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ============================================================
+     SLIDER DE DEPOIMENTOS
+     ============================================================ */
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let current = 0;
+  let autoTimer = null;
+
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'dot' + (i === 0 ? ' active' : '');
+    b.setAttribute('aria-label', 'Depoimento ' + (i + 1));
+    b.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(b);
+  });
+
+  const dots = Array.from(dotsWrap.children);
+
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAuto() {
+    if (reduceMotion) return;
+    stopAuto();
+    autoTimer = setInterval(next, 6000);
+  }
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = null;
+  }
+
+  nextBtn.addEventListener('click', () => { next(); startAuto(); });
+  prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+
+  const sliderEl = document.querySelector('.slider');
+  sliderEl.addEventListener('mouseenter', stopAuto);
+  sliderEl.addEventListener('mouseleave', startAuto);
+
+  // Swipe no mobile
+  let touchX = 0;
+  sliderEl.addEventListener('touchstart', (e) => {
+    touchX = e.changedTouches[0].screenX;
+    stopAuto();
+  }, { passive: true });
+
+  sliderEl.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchX;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) next(); else prev();
+    }
+    startAuto();
+  }, { passive: true });
+
+  startAuto();
+
+  /* ============================================================
+     LINK ATIVO NA NAVEGAÇÃO
+     ============================================================ */
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+
+  if ('IntersectionObserver' in window) {
+    const nio = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navAnchors.forEach((a) => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-90px 0px -55% 0px' });
+
+    sections.forEach((s) => nio.observe(s));
+  }
+
+  /* ============================================================
+     FORMULÁRIO
+     ============================================================ */
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+
+  const validators = {
+    nome: (v) => v.trim().length >= 3,
+    email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+    telefone: (v) => v.replace(/\D/g, '').length >= 10,
+    objetivo: (v) => v !== ''
+  };
+
+  // Máscara de telefone
+  const telInput = document.getElementById('telefone');
+  telInput.addEventListener('input', (e) => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 6) {
+      v = v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+    } else if (v.length > 2) {
+      v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    } else if (v.length > 0) {
+      v = v.replace(/^(\d{0,2})/, '($1');
+    }
+    e.target.value = v;
+  });
+
+  function validateField(input) {
+    const fn = validators[input.name];
+    if (!fn) return true;
+    const ok = fn(input.value);
+    input.closest('.field').classList.toggle('error', !ok);
+    return ok;
+  }
+
+  form.querySelectorAll('input, select, textarea').forEach((input) => {
+    input.addEventListener('blur', () => validateField(input));
+    input.addEventListener('input', () => {
+      if (input.closest('.field').classList.contains('error')) validateField(input);
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    ['nome', 'email', 'telefone', 'objetivo'].forEach((name) => {
+      const input = form.elements[name];
+      if (!validateField(input)) valid = false;
+    });
+
+    if (!valid) {
+      const firstError = form.querySelector('.field.error input, .field.error select');
+      if (firstError) firstError.focus();
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.innerHTML = 'Enviando...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.disabled = false;
+      form.reset();
+      success.classList.add('show');
+      setTimeout(() => success.classList.remove('show'), 6000);
+    }, 1100);
+  });
+
+  /* ============================================================
+     ANO NO FOOTER
+     ============================================================ */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+})();
+</script>
+</body>
+</html>
